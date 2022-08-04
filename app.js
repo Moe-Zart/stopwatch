@@ -16,13 +16,18 @@ function timerStop(){
 
 function updateTimer(){
     let millisecondsEllapsed = Date.now()-time
-    let secondsEllapsed = Math.floor(millisecondsEllapsed/1000)
-    if (secondsEllapsed>=0 && secondsEllapsed<10){
+    let secondsEllapsed = Math.floor(millisecondsEllapsed/1000 % 60)
+    let minutesEllapsed = Math.floor(millisecondsEllapsed/60000 % 60)
+    if (secondsEllapsed>=0 && secondsEllapsed <10){
         secondsEllapsed = '0'+ secondsEllapsed
+    }
+    if (minutesEllapsed>=0 && minutesEllapsed <10){
+        minutesEllapsed = '0'+ minutesEllapsed
     }
     
     timerMilliseconds.innerHTML = millisecondsEllapsed % 1000
     timerSeconds.innerHTML = secondsEllapsed
+    timerMinutes.innerHTML = minutesEllapsed
     cancelId = requestAnimationFrame(updateTimer)
     //repeat the same animation frame function here
 }
